@@ -1,0 +1,17 @@
+import * as React from "react";
+import { ButtonGroup, Divider, HStack } from "@chakra-ui/react";
+import NavLink from "./nav-link";
+
+type MainNavProps = {};
+
+const MainNav: React.FC<MainNavProps> = (): JSX.Element => {
+  return (
+    <ButtonGroup spacing="6">
+      <NavLink to="/cats">Cats</NavLink>
+      <NavLink to="/breeds">Breeds</NavLink>
+      <NavLink to="/favourites">Favourites</NavLink>
+    </ButtonGroup>
+  );
+};
+
+export default MainNav;
