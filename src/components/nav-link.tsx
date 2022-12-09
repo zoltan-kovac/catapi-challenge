@@ -7,10 +7,13 @@ type NavLinkProps = React.PropsWithChildren<{
 }>;
 
 const NavLink: React.FC<NavLinkProps> = ({ children, to }): JSX.Element => {
-  return (
-    <Button variant="link" as={BaseNavLink} to={to}>
-      {children}
-    </Button>
+  return React.useMemo(
+    () => (
+      <Button variant="link" as={BaseNavLink} to={to}>
+        {children}
+      </Button>
+    ),
+    []
   );
 };
 

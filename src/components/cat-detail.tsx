@@ -47,7 +47,7 @@ const CatDetail: React.FC<CatDetailProps> = ({
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
-          {breeds ? breeds.map(({ name }) => name) : "No breed data"}
+          {breeds ? breeds.map(({ name }) => name).join(", ") : "No breed data"}
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>

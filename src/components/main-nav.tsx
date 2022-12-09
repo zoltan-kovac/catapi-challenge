@@ -5,12 +5,15 @@ import NavLink from "./nav-link";
 type MainNavProps = {};
 
 const MainNav: React.FC<MainNavProps> = (): JSX.Element => {
-  return (
-    <ButtonGroup spacing="6">
-      <NavLink to="/cats">Cats</NavLink>
-      <NavLink to="/breeds">Breeds</NavLink>
-      <NavLink to="/favourites">Favourites</NavLink>
-    </ButtonGroup>
+  return React.useMemo(
+    () => (
+      <ButtonGroup spacing="6">
+        <NavLink to="/cats">Cats</NavLink>
+        <NavLink to="/breeds">Breeds</NavLink>
+        <NavLink to="/favourites">Favourites</NavLink>
+      </ButtonGroup>
+    ),
+    []
   );
 };
 
