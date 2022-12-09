@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { CatImage, SearchCatQueryParams } from "../cats/types";
+import { CatImage, SearchQueryParams } from "../cats/types";
 import { headers } from "../../api";
+import { Breed } from "./types";
 
-export async function getBreedQuery(breedId?: string): Promise<CatImage[]> {
+export async function getBreedQuery(breedId?: string): Promise<Breed> {
   return await axios
     .get(`https://api.thecatapi.com/v1/breeds/${breedId}`, {
       headers,
@@ -11,16 +12,16 @@ export async function getBreedQuery(breedId?: string): Promise<CatImage[]> {
     .then((response) => response.data);
 }
 
-export function useBreedQuery(breedId: string) {
+export function useBreedQuery(breedId?: string) {
   return useQuery({
     queryKey: ["breeds", breedId],
-    queryFn: () => getBreedQuery(),
+    queryFn: () => getBreedQuery(breedId),
     enabled: breedId != null,
   });
 }
 
 export async function getBreedsQuery(
-  params?: SearchCatQueryParams
+  params?: SearchQueryParams
 ): Promise<CatImage[]> {
   const defaultParams = {
     limit: 10,
@@ -41,7 +42,7 @@ export async function getBreedsQuery(
 export function useBreedsQuery() {
   return useInfiniteQuery({
     queryKey: ["breeds"],
-    queryFn: (params) => getBreedsQuery(params),
+    queryFn: () => getBreedsQuery(),
     getNextPageParam: (_, allPages) => allPages.length,
   });
 }

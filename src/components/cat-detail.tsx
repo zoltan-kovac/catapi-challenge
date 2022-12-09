@@ -43,30 +43,28 @@ const CatDetail: React.FC<CatDetailProps> = ({
   };
 
   return (
-    <>
-      <Modal isOpen={isOpen} onClose={handleClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            {breeds ? breeds.map(({ name }) => name) : "No breed data"}
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            {isFetching ? (
-              <Spinner />
-            ) : (
-              url && id && <CatThumbnail url={url} id={id} />
-            )}
-          </ModalBody>
-          <ModalFooter>
-            <ButtonGroup>
-              {catId && <AddFavCatBtn id={catId} disabled={favId != null} />}
-              {<DeleteFavCatBtn id={favId} onSuccess={handleClose} />}
-            </ButtonGroup>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
+    <Modal isOpen={isOpen} onClose={handleClose}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>
+          {breeds ? breeds.map(({ name }) => name) : "No breed data"}
+        </ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          {isFetching ? (
+            <Spinner />
+          ) : (
+            url && id && <CatThumbnail url={url} id={id} />
+          )}
+        </ModalBody>
+        <ModalFooter>
+          <ButtonGroup>
+            {catId && <AddFavCatBtn id={catId} disabled={favId != null} />}
+            {<DeleteFavCatBtn id={favId} onSuccess={handleClose} />}
+          </ButtonGroup>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 };
 

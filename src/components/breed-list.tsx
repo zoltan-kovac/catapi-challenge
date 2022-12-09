@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Stack, Tag, TagLabel } from "@chakra-ui/react";
-import { Breed } from "../routes/cats/types";
 import NavLink from "./nav-link";
 import { useParams } from "react-router-dom";
+import { Breed } from "../routes/breeds/types";
 
 type BreedListProps = {
   breeds: {

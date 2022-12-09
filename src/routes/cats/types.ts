@@ -1,7 +1,4 @@
-export type Breed = {
-  id: string;
-  name?: string;
-};
+import { Breed } from "../breeds/types";
 
 export type CatImage = {
   breeds?: Breed[];
@@ -11,6 +8,7 @@ export type CatImage = {
   width?: string;
 };
 
-export type SearchCatQueryParams = {
+export type SearchQueryParams = {
   pageParam?: number;
+  breed_ids?: any[];
 };

@@ -1,10 +1,11 @@
 import axios from "axios";
-import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
-import { CatImage, SearchCatQueryParams } from "./types";
+import qs from "qs";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { CatImage, SearchQueryParams } from "./types";
 import { headers } from "../../api";
 
 export async function getRandomCatsQuery(
-  params?: SearchCatQueryParams
+  params?: SearchQueryParams
 ): Promise<CatImage[]> {
   const defaultParams = {
     limit: 10,
@@ -16,16 +17,21 @@ export async function getRandomCatsQuery(
       headers,
       params: {
         ...defaultParams,
+        ...params,
         page: params?.pageParam || 0,
+      },
+
+      paramsSerializer: {
+        serialize: (params) => qs.stringify(params, { arrayFormat: "comma" }),
       },
     })
     .then((response) => response.data);
 }
 
-export function useCatsQuery() {
+export function useCatsQuery(params?: SearchQueryParams) {
   return useInfiniteQuery({
     queryKey: ["cats"],
-    queryFn: (params) => getRandomCatsQuery(params),
+    queryFn: () => getRandomCatsQuery(params),
     getNextPageParam: (_, allPages) => allPages.length,
   });
 }
