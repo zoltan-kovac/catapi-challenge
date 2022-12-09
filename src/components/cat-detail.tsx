@@ -11,7 +11,7 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useCatQuery } from "../routes/cats/api";
+import { useCatQuery, useFavCatMutation } from "../routes/cats/api";
 import CatThumbnail from "./cat-thumbnail";
 
 type CatDetailProps = {
@@ -26,8 +26,9 @@ const CatDetail: React.FC<CatDetailProps> = ({
   const navigate = useNavigate();
   const { catId } = useParams<{ catId: string }>();
   const { data, isFetching } = useCatQuery(catId);
+  const addToFavMutation = useFavCatMutation();
 
-  const { id, url } = data || {};
+  const { id, url, breeds } = data || {};
 
   const handleClose = () => {
     onClose();
@@ -38,16 +39,15 @@ const CatDetail: React.FC<CatDetailProps> = ({
     <Modal isOpen={isOpen} onClose={handleClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Modal Title</ModalHeader>
+        <ModalHeader>
+          {breeds ? breeds.map(({ name }) => name) : "No breed data"}
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           {isFetching ? (
             <Spinner />
           ) : (
-            <>
-              {/* @ts-ignore */}
-              <CatThumbnail url={url} id={id} />
-            </>
+            url && id && <CatThumbnail url={url} id={id} />
           )}
         </ModalBody>
 
@@ -55,7 +55,14 @@ const CatDetail: React.FC<CatDetailProps> = ({
           <Button colorScheme="blue" mr={3} onClick={handleClose}>
             Close
           </Button>
-          <Button variant="ghost">Fav</Button>
+          {catId && (
+            <Button
+              variant="ghost"
+              onClick={() => addToFavMutation.mutate(catId)}
+            >
+              Fav
+            </Button>
+          )}
         </ModalFooter>
       </ModalContent>
     </Modal>

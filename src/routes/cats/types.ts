@@ -1,5 +1,6 @@
 export type Breed = {
   id: string;
+  name?: string;
 };
 
 export type CatImage = {

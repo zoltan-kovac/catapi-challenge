@@ -2,15 +2,7 @@ import * as React from "react";
 import { Card, CardBody, Center, Image, Spinner } from "@chakra-ui/react";
 import { CatImage as CatImageType } from "../routes/cats/types";
 
-interface CaatThumbnailProps extends CatImageType {
-  url: string;
-  id: string;
-}
-
-const CaatThumbnail: React.FC<CaatThumbnailProps> = ({
-  id,
-  url,
-}): JSX.Element => {
+const CaatThumbnail: React.FC<CatImageType> = ({ id, url }): JSX.Element => {
   return React.useMemo(
     () => (
       <Card>

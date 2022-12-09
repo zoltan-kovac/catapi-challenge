@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
 import { CatImage, SearchCatQueryParams } from "./types";
 
 const headers = {
@@ -43,8 +43,22 @@ export async function getCatQuery(catId?: string): Promise<CatImage> {
 
 export function useCatQuery(catId?: string) {
   return useQuery({
-    queryKey: ["cats", "detail", catId],
+    queryKey: ["cats", catId],
     queryFn: () => getCatQuery(catId),
     enabled: catId != null,
+  });
+}
+
+export function useFavCatMutation(catId?: string) {
+  return useMutation({
+    mutationFn: (catId) => {
+      return axios.post(
+        `https://api.thecatapi.com/v1/favourites`,
+        { image_id: catId },
+        {
+          headers,
+        }
+      );
+    },
   });
 }
