@@ -1,6 +1,7 @@
 import * as React from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
-  Button,
+  ButtonGroup,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -10,9 +11,12 @@ import {
   ModalOverlay,
   Spinner,
 } from "@chakra-ui/react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useCatQuery, useFavCatMutation } from "../routes/cats/api";
+import { useCatQuery } from "../routes/cats/api";
 import CatThumbnail from "./cat-thumbnail";
+import { useGetFavsQuery } from "../routes/favourites/api";
+import DeleteFavCatBtn from "./delete-favourite-cat-button";
+import AddFavCatBtn from "./add-favourite-cat-button";
+import { find } from "lodash";
 
 type CatDetailProps = {
   isOpen: boolean;
@@ -26,46 +30,43 @@ const CatDetail: React.FC<CatDetailProps> = ({
   const navigate = useNavigate();
   const { catId } = useParams<{ catId: string }>();
   const { data, isFetching } = useCatQuery(catId);
-  const addToFavMutation = useFavCatMutation();
+  const { data: favCats } = useGetFavsQuery();
 
   const { id, url, breeds } = data || {};
+  const favId = find(favCats, { image_id: id })?.id;
 
   const handleClose = () => {
     onClose();
-    return navigate("/cats");
+
+    // It might be better to use react router loader / action
+    return navigate("./");
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>
-          {breeds ? breeds.map(({ name }) => name) : "No breed data"}
-        </ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          {isFetching ? (
-            <Spinner />
-          ) : (
-            url && id && <CatThumbnail url={url} id={id} />
-          )}
-        </ModalBody>
-
-        <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={handleClose}>
-            Close
-          </Button>
-          {catId && (
-            <Button
-              variant="ghost"
-              onClick={() => addToFavMutation.mutate(catId)}
-            >
-              Fav
-            </Button>
-          )}
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+    <>
+      <Modal isOpen={isOpen} onClose={handleClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            {breeds ? breeds.map(({ name }) => name) : "No breed data"}
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            {isFetching ? (
+              <Spinner />
+            ) : (
+              url && id && <CatThumbnail url={url} id={id} />
+            )}
+          </ModalBody>
+          <ModalFooter>
+            <ButtonGroup>
+              {catId && <AddFavCatBtn id={catId} disabled={favId != null} />}
+              {<DeleteFavCatBtn id={favId} onSuccess={handleClose} />}
+            </ButtonGroup>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
 

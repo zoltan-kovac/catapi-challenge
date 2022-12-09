@@ -1,29 +1,47 @@
 import * as React from "react";
-import { Box, Button } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-import Layout from "../../components/layout";
+import { Button, Center, Spinner } from "@chakra-ui/react";
 import { useBreedsQuery } from "./api";
+import Layout from "../../components/layout";
+import BreedList from "../../components/breed-list";
 
 type BreedsViewProps = {};
 
 const BreedsView: React.FC<BreedsViewProps> = (): JSX.Element => {
-  const { catId } = useParams();
+  const { breedId } = useParams<{ breedId: string }>();
+
   const {
     data: breeds = {
       pages: [],
     },
+    isLoading,
     fetchNextPage,
+    isFetching,
   } = useBreedsQuery();
 
-  return React.useMemo(
-    () => (
-      <Layout>
-        <Box>
-          <Button onClick={() => fetchNextPage()}>More breeds please!</Button>
-        </Box>
-      </Layout>
-    ),
-    [breeds]
+  return (
+    <Layout>
+      {isLoading ? (
+        <Center>
+          <Spinner />
+        </Center>
+      ) : (
+        <BreedList breeds={breeds} />
+      )}
+      {!breedId && (
+        <Center>
+          <Button
+            my={5}
+            size="lg"
+            onClick={() => fetchNextPage()}
+            isLoading={isFetching}
+            disabled={isFetching}
+          >
+            More breeds please!
+          </Button>
+        </Center>
+      )}
+    </Layout>
   );
 };
 

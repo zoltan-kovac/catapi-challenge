@@ -7,7 +7,7 @@ export type CatImage = {
   breeds?: Breed[];
   height?: string;
   id: string;
-  url: string;
+  url?: string;
   width?: string;
 };
 

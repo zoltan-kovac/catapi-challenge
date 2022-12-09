@@ -1,10 +1,7 @@
 import axios from "axios";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { CatImage, SearchCatQueryParams } from "../cats/types";
-
-const headers = {
-  "x-api-key": import.meta.env.VITE_API_KEY,
-};
+import { headers } from "../../api";
 
 export async function getBreedQuery(breedId?: string): Promise<CatImage[]> {
   return await axios
@@ -43,7 +40,7 @@ export async function getBreedsQuery(
 
 export function useBreedsQuery() {
   return useInfiniteQuery({
-    queryKey: ["cats"],
+    queryKey: ["breeds"],
     queryFn: (params) => getBreedsQuery(params),
     getNextPageParam: (_, allPages) => allPages.length,
   });

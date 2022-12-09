@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ButtonGroup, Divider, HStack } from "@chakra-ui/react";
+import { ButtonGroup } from "@chakra-ui/react";
 import NavLink from "./nav-link";
 
 type MainNavProps = {};

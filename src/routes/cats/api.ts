@@ -1,10 +1,7 @@
 import axios from "axios";
 import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
 import { CatImage, SearchCatQueryParams } from "./types";
-
-const headers = {
-  "x-api-key": import.meta.env.VITE_API_KEY,
-};
+import { headers } from "../../api";
 
 export async function getRandomCatsQuery(
   params?: SearchCatQueryParams
@@ -46,19 +43,5 @@ export function useCatQuery(catId?: string) {
     queryKey: ["cats", catId],
     queryFn: () => getCatQuery(catId),
     enabled: catId != null,
-  });
-}
-
-export function useFavCatMutation(catId?: string) {
-  return useMutation({
-    mutationFn: (catId) => {
-      return axios.post(
-        `https://api.thecatapi.com/v1/favourites`,
-        { image_id: catId },
-        {
-          headers,
-        }
-      );
-    },
   });
 }

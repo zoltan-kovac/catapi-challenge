@@ -1,8 +1,9 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
-import CatDetailModal from "../components/cat-detail";
+import BreedDetail from "../components/breed-detail";
 import Layout from "../components/layout";
 import BreedsView from "./breeds";
 import CatsView from "./cats";
+import FavouritesView from "./favourites";
 
 const rootLoader = async () => {
   return redirect("/cats");
@@ -25,10 +26,16 @@ export const router = createBrowserRouter([
   },
   {
     path: "favourites",
-    element: <Layout>Favs</Layout>,
+    element: <FavouritesView />,
   },
   {
     path: "breeds",
     element: <BreedsView />,
+    children: [
+      {
+        path: ":breedId",
+        element: <BreedDetail />,
+      },
+    ],
   },
 ]);
