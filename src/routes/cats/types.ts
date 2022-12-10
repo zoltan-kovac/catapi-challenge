@@ -9,6 +9,6 @@ export type CatImage = {
 };
 
 export type SearchQueryParams = {
-  pageParam?: number;
-  breed_ids?: any[];
+  page?: number;
+  breed_ids?: string;
 };

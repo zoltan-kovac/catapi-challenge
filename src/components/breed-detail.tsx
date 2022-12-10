@@ -31,7 +31,7 @@ const BreedDetail: React.FC<BreedDetailProps> = (): JSX.Element => {
       pages: [],
     },
     isFetching,
-  } = useCatsQuery({ breed_ids: [breedId] });
+  } = useCatsQuery(breedId);
 
   const { name } = breed || {};
 

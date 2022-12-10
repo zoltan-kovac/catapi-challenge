@@ -4,9 +4,10 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { CatImage, SearchQueryParams } from "./types";
 import { headers } from "../../api";
 
-export async function getRandomCatsQuery(
-  params?: SearchQueryParams
-): Promise<CatImage[]> {
+export async function getRandomCatsQuery({
+  page,
+  breed_ids,
+}: SearchQueryParams): Promise<CatImage[]> {
   const defaultParams = {
     limit: 10,
     page: 0,
@@ -17,8 +18,8 @@ export async function getRandomCatsQuery(
       headers,
       params: {
         ...defaultParams,
-        ...params,
-        page: params?.pageParam || 0,
+        page,
+        breed_ids,
       },
 
       paramsSerializer: {
@@ -28,10 +29,11 @@ export async function getRandomCatsQuery(
     .then((response) => response.data);
 }
 
-export function useCatsQuery(params?: SearchQueryParams) {
+export function useCatsQuery(breed_ids?: string) {
   return useInfiniteQuery({
     queryKey: ["cats"],
-    queryFn: () => getRandomCatsQuery(params),
+    queryFn: ({ pageParam }) =>
+      getRandomCatsQuery({ page: pageParam, breed_ids }),
     getNextPageParam: (_, allPages) => allPages.length,
   });
 }

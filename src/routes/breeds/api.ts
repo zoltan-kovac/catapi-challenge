@@ -20,9 +20,7 @@ export function useBreedQuery(breedId?: string) {
   });
 }
 
-export async function getBreedsQuery(
-  params?: SearchQueryParams
-): Promise<CatImage[]> {
+export async function getBreedsQuery(page?: number): Promise<CatImage[]> {
   const defaultParams = {
     limit: 10,
     page: 0,
@@ -33,7 +31,7 @@ export async function getBreedsQuery(
       headers,
       params: {
         ...defaultParams,
-        page: params?.pageParam || 0,
+        page,
       },
     })
     .then((response) => response.data);
@@ -42,7 +40,7 @@ export async function getBreedsQuery(
 export function useBreedsQuery() {
   return useInfiniteQuery({
     queryKey: ["breeds"],
-    queryFn: () => getBreedsQuery(),
+    queryFn: ({ pageParam }) => getBreedsQuery(pageParam),
     getNextPageParam: (_, allPages) => allPages.length,
   });
 }
