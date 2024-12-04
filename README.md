@@ -2,7 +2,7 @@
 
 ## Deploy status
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/a8bfbfc0-4fc9-4a99-bff6-96fc268c6c7a/deploy-status)](https://app.netlify.com/sites/nimble-sundae-4845ac/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/595c90c7-0c36-4026-b3a4-762b457fee38/deploy-status)](https://app.netlify.com/sites/effortless-croissant-086741/deploys)
 
 ## Exercise: CatLover
 
@@ -18,5 +18,3 @@ The **third** view allows you do the following things:
 
 You can find the API documentation here: https://docs.thecatapi.com/
 We give you a lot of freedom in technologies and ways of doing things. We only insist on you using React.js. Get creative as much as you want, we WILL appreciate it. You will not be evaluated based on how well you follow these instructions, but based on how sensible your solution will be. In case you are not able to implement something you would normally implement for time reasons, make it clear with a comment.
-
-
