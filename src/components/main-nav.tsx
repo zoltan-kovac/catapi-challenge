@@ -2,9 +2,7 @@ import * as React from "react";
 import { ButtonGroup } from "@chakra-ui/react";
 import NavLink from "./nav-link";
 
-type MainNavProps = {};
-
-const MainNav: React.FC<MainNavProps> = (): JSX.Element => {
+const MainNav: React.FC = (): JSX.Element => {
   return React.useMemo(
     () => (
       <ButtonGroup spacing="6">
