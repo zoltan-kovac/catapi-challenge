@@ -1,4 +1,4 @@
-import { Breed } from "../breeds/types";
+import type { Breed } from "../breeds/types";
 
 export type CatImage = {
   breeds?: Breed[];

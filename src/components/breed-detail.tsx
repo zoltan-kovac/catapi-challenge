@@ -15,12 +15,9 @@ import * as React from "react";
 import { Link as RouterLink, useNavigate, useParams } from "react-router-dom";
 import { useBreedQuery } from "../routes/breeds/api";
 import { useCatsQuery } from "../routes/cats/api";
-import { CatImage } from "../routes/cats/types";
 import CaatThumbnail from "./cat-thumbnail";
 
-type BreedDetailProps = {};
-
-const BreedDetail: React.FC<BreedDetailProps> = (): JSX.Element => {
+const BreedDetail: React.FC = (): JSX.Element => {
   const { breedId } = useParams();
   const { isOpen, onClose, onOpen } = useDisclosure();
   const navigate = useNavigate();
