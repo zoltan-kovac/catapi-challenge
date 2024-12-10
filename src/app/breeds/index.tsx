@@ -1,9 +1,9 @@
-import * as React from "react";
-import { useParams } from "react-router-dom";
 import { Button, Center, Spinner } from "@chakra-ui/react";
-import { useBreedsQuery } from "./api";
-import Layout from "../../components/layout";
+import type * as React from "react";
+import { useParams } from "react-router-dom";
 import BreedList from "../../components/breed-list";
+import Layout from "../../components/layout";
+import { useBreedsQuery } from "./api";
 
 type BreedsViewProps = {};
 

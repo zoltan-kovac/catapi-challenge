@@ -1,7 +1,7 @@
-import * as React from "react";
 import { Button, Icon, useToast } from "@chakra-ui/react";
+import * as React from "react";
 import { FaStar } from "react-icons/fa";
-import { useFavCatMutation } from "../routes/favourites/api";
+import { useFavCatMutation } from "../app/favourites/api";
 
 type AddFavCatBtnProps = { id: string; disabled: boolean };
 
@@ -21,7 +21,7 @@ const AddFavCatBtn: React.FC<AddFavCatBtnProps> = ({
           isClosable: true,
         })
       : null;
-  }, [addFavCat.isSuccess]);
+  }, [addFavCat.isSuccess, toast]);
 
   const isDisabled = disabled || addFavCat.isSuccess;
 
@@ -29,7 +29,7 @@ const AddFavCatBtn: React.FC<AddFavCatBtnProps> = ({
     <Button
       colorScheme="green"
       onClick={() => addFavCat.mutate()}
-      isLoading={addFavCat.isLoading}
+      isLoading={addFavCat.isPending}
       disabled={isDisabled}
     >
       <Icon as={FaStar} />

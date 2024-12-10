@@ -1,4 +1,4 @@
-import { CatImage } from "../cats/types";
+import type { CatImage } from "../cats/types";
 
 export interface FavouriteCat extends CatImage {
   image: {

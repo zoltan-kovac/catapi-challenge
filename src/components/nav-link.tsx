@@ -13,7 +13,7 @@ const NavLink: React.FC<NavLinkProps> = ({ children, to }): JSX.Element => {
         {children}
       </Button>
     ),
-    []
+    [],
   );
 };
 

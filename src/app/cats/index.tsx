@@ -1,9 +1,9 @@
-import * as React from "react";
-import { useParams } from "react-router-dom";
 import { Button, Center, Spinner } from "@chakra-ui/react";
-import { useCatsQuery } from "./api";
+import type * as React from "react";
+import { useParams } from "react-router-dom";
 import CatList from "../../components/cat-list";
 import Layout from "../../components/layout";
+import { useCatsQuery } from "./api";
 
 type CatsViewProps = {};
 

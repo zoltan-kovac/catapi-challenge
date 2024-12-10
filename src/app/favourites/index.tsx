@@ -1,7 +1,7 @@
 import * as React from "react";
-import { useGetFavsQuery } from "./api";
 import CatList from "../../components/cat-list";
 import Layout from "../../components/layout";
+import { useGetFavsQuery } from "./api";
 
 type FavouritesViewProps = {};
 
@@ -20,7 +20,7 @@ const FavouritesView: React.FC<FavouritesViewProps> = (): JSX.Element => {
         <CatList cats={{ pages: [[...cats]] }} />
       </Layout>
     ),
-    [favourites]
+    [favourites],
   );
 };
 

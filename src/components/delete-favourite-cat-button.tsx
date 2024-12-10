@@ -1,7 +1,7 @@
-import * as React from "react";
 import { Button, Icon, useToast } from "@chakra-ui/react";
+import * as React from "react";
 import { FaTrash } from "react-icons/fa";
-import { useDeleteFavCatMutation } from "../routes/favourites/api";
+import { useDeleteFavCatMutation } from "../app/favourites/api";
 
 type DeleteFavCatBtnProps = { id?: string; onSuccess?: () => void };
 

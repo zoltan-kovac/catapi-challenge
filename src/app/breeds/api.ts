@@ -1,8 +1,8 @@
-import axios from "axios";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { CatImage, SearchQueryParams } from "../cats/types";
-import { headers } from "../../api";
-import { Breed } from "./types";
+import axios from "axios";
+import { headers } from "../../lib/api";
+import { type CatImage, SearchQueryParams } from "../cats/types";
+import type { Breed } from "./types";
 
 export async function getBreedQuery(breedId?: string): Promise<Breed> {
   return await axios

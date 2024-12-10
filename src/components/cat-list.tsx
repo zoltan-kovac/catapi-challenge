@@ -1,10 +1,10 @@
-import * as React from "react";
-import { Link as RouterLink } from "react-router-dom";
 import { Box, Link, SimpleGrid, useDisclosure } from "@chakra-ui/react";
-import { CatImage } from "../routes/cats/types";
-import CatThumbnail from "./cat-thumbnail";
+import type * as React from "react";
+import { Link as RouterLink } from "react-router-dom";
+import type { CatImage } from "../app/cats/types";
+import type { FavouriteCat } from "../app/favourites/types";
 import CatDetail from "./cat-detail";
-import { FavouriteCat } from "../routes/favourites/types";
+import CatThumbnail from "./cat-thumbnail";
 
 type CatListProps = {
   cats: {

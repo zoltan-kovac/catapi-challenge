@@ -1,5 +1,3 @@
-import * as React from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import {
   ButtonGroup,
   Modal,
@@ -11,12 +9,14 @@ import {
   ModalOverlay,
   Spinner,
 } from "@chakra-ui/react";
-import { useCatQuery } from "../routes/cats/api";
-import CatThumbnail from "./cat-thumbnail";
-import { useGetFavsQuery } from "../routes/favourites/api";
-import DeleteFavCatBtn from "./delete-favourite-cat-button";
-import AddFavCatBtn from "./add-favourite-cat-button";
 import { find } from "lodash";
+import type * as React from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useCatQuery } from "../app/cats/api";
+import { useGetFavsQuery } from "../app/favourites/api";
+import AddFavCatBtn from "./add-favourite-cat-button";
+import CatThumbnail from "./cat-thumbnail";
+import DeleteFavCatBtn from "./delete-favourite-cat-button";
 
 type CatDetailProps = {
   isOpen: boolean;

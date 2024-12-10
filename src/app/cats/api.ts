@@ -1,8 +1,8 @@
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import qs from "qs";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { CatImage, SearchQueryParams } from "./types";
-import { headers } from "../../api";
+import { headers } from "../../lib/api";
+import type { CatImage, SearchQueryParams } from "./types";
 
 export async function getRandomCatsQuery({
   page,

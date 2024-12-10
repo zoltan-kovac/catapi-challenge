@@ -13,8 +13,8 @@ import {
 } from "@chakra-ui/react";
 import * as React from "react";
 import { Link as RouterLink, useNavigate, useParams } from "react-router-dom";
-import { useBreedQuery } from "../routes/breeds/api";
-import { useCatsQuery } from "../routes/cats/api";
+import { useBreedQuery } from "../app/breeds/api";
+import { useCatsQuery } from "../app/cats/api";
 import CaatThumbnail from "./cat-thumbnail";
 
 const BreedDetail: React.FC = (): JSX.Element => {

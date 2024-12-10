@@ -1,6 +1,6 @@
-import * as React from "react";
 import { Card, CardBody, Center, Image, Spinner } from "@chakra-ui/react";
-import { CatImage as CatImageType } from "../routes/cats/types";
+import * as React from "react";
+import type { CatImage as CatImageType } from "../app/cats/types";
 
 const CaatThumbnail: React.FC<CatImageType> = ({ id, url }): JSX.Element => {
   return React.useMemo(
@@ -40,7 +40,7 @@ const CaatThumbnail: React.FC<CatImageType> = ({ id, url }): JSX.Element => {
         </CardBody>
       </Card>
     ),
-    []
+    [],
   );
 };
 

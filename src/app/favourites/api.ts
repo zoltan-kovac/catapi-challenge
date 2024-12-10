@@ -1,11 +1,11 @@
-import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { headers } from "../../api";
-import { FavouriteCat } from "./types";
+import axios from "axios";
+import { headers } from "../../lib/api";
+import type { FavouriteCat } from "./types";
 
 export async function getFavsQuery(): Promise<FavouriteCat[]> {
   return await axios
-    .get(`https://api.thecatapi.com/v1/favourites`, {
+    .get("https://api.thecatapi.com/v1/favourites", {
       headers,
     })
     .then((response) => response.data);
@@ -18,12 +18,14 @@ export function useGetFavsQuery() {
   });
 }
 
-export async function deleteFavCatQuery(favouriteId?: string): Promise<any> {
+export async function deleteFavCatQuery(
+  favouriteId?: string,
+): Promise<unknown> {
   return await axios.delete(
     `https://api.thecatapi.com/v1/favourites/${favouriteId}`,
     {
       headers,
-    }
+    },
   );
 }
 
@@ -39,11 +41,11 @@ export function useFavCatMutation(catId?: string) {
   return useMutation({
     mutationFn: () => {
       return axios.post(
-        `https://api.thecatapi.com/v1/favourites`,
+        "https://api.thecatapi.com/v1/favourites",
         { image_id: catId },
         {
           headers,
-        }
+        },
       );
     },
     onSuccess: () => {

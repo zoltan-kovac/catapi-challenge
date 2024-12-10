@@ -1,5 +1,5 @@
-import * as React from "react";
 import { ButtonGroup } from "@chakra-ui/react";
+import * as React from "react";
 import NavLink from "./nav-link";
 
 const MainNav: React.FC = (): JSX.Element => {
@@ -11,7 +11,7 @@ const MainNav: React.FC = (): JSX.Element => {
         <NavLink to="/favourites">Favourites</NavLink>
       </ButtonGroup>
     ),
-    []
+    [],
   );
 };
 
