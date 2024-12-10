@@ -3,9 +3,7 @@ import CatList from "../../components/cat-list";
 import Layout from "../../components/layout";
 import { useGetFavsQuery } from "./api";
 
-type FavouritesViewProps = {};
-
-const FavouritesView: React.FC<FavouritesViewProps> = (): JSX.Element => {
+const FavouritesView: React.FC = (): JSX.Element => {
   const { data: favourites = [] } = useGetFavsQuery();
 
   const cats = favourites?.map((cat) => ({
@@ -20,7 +18,7 @@ const FavouritesView: React.FC<FavouritesViewProps> = (): JSX.Element => {
         <CatList cats={{ pages: [[...cats]] }} />
       </Layout>
     ),
-    [favourites],
+    [cats],
   );
 };
 

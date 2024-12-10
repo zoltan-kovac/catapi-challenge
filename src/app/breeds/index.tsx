@@ -5,9 +5,7 @@ import BreedList from "../../components/breed-list";
 import Layout from "../../components/layout";
 import { useBreedsQuery } from "./api";
 
-type BreedsViewProps = {};
-
-const BreedsView: React.FC<BreedsViewProps> = (): JSX.Element => {
+const BreedsView: React.FC = (): JSX.Element => {
   const { breedId } = useParams<{ breedId: string }>();
 
   const {

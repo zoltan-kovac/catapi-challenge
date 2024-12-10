@@ -2,7 +2,7 @@ import { Stack, Tag, TagLabel } from "@chakra-ui/react";
 import type * as React from "react";
 import { useParams } from "react-router-dom";
 import type { Breed } from "../app/breeds/types";
-import NavLink from "./nav-link";
+import NavLink from "./sidebar/nav-link";
 
 type BreedListProps = {
   breeds: {
@@ -18,9 +18,9 @@ const BreedList: React.FC<BreedListProps> = ({ breeds }): JSX.Element => {
       {!breedId && (
         <Stack spacing={4}>
           {breeds?.pages?.map((page: Breed[]) => {
-            return page?.map(({ name, id }, index) => {
+            return page?.map(({ name, id }) => {
               return (
-                <Tag size="lg" borderRadius="full">
+                <Tag size="lg" borderRadius="full" key={`tab-${id}`}>
                   <NavLink to={`/breeds/${id}`}>
                     <TagLabel>{name}</TagLabel>
                   </NavLink>

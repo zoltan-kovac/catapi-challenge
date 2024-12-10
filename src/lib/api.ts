@@ -1,3 +1,4 @@
 export const headers = {
-  "x-api-key": import.meta.env.VITE_API_KEY,
+  "content-type": "application/json",
+  "x-api-key": `${import.meta.env.VITE_X_API_KEY}`,
 };

@@ -1,6 +1,6 @@
 import { ButtonGroup } from "@chakra-ui/react";
 import * as React from "react";
-import NavLink from "./nav-link";
+import NavLink from "./sidebar/nav-link";
 
 const MainNav: React.FC = (): JSX.Element => {
   return React.useMemo(

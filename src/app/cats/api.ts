@@ -14,7 +14,7 @@ export async function getRandomCatsQuery({
   };
 
   return await axios
-    .get(`https://api.thecatapi.com/v1/images/search`, {
+    .get("https://api.thecatapi.com/v1/images/search", {
       headers,
       params: {
         ...defaultParams,
@@ -34,6 +34,7 @@ export function useCatsQuery(breed_ids?: string) {
     queryKey: ["cats"],
     queryFn: ({ pageParam }) =>
       getRandomCatsQuery({ page: pageParam, breed_ids }),
+    initialPageParam: 0,
     getNextPageParam: (_, allPages) => allPages.length,
   });
 }

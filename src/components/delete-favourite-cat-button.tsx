@@ -16,15 +16,14 @@ const DeleteFavCatBtn: React.FC<DeleteFavCatBtnProps> = ({
 
   React.useEffect(() => {
     deleteFavCat.isSuccess
-      ? (toast({
+      ? toast({
           title: "Removed from favourites.",
           status: "error",
           duration: 1000,
           isClosable: true,
-        }),
-        onSuccess && onSuccess())
+        }) && onSuccess?.()
       : null;
-  }, [deleteFavCat.isSuccess]);
+  }, [deleteFavCat.isSuccess, toast, onSuccess]);
 
   React.useEffect(() => {
     deleteFavCat.isError
@@ -35,13 +34,13 @@ const DeleteFavCatBtn: React.FC<DeleteFavCatBtnProps> = ({
           isClosable: true,
         })
       : null;
-  }, [deleteFavCat.isError]);
+  }, [deleteFavCat.isError, toast]);
 
   return (
     <Button
       colorScheme="red"
       onClick={() => deleteFavCat.mutate(id)}
-      isLoading={deleteFavCat.isLoading}
+      isLoading={deleteFavCat.isPending}
       disabled={disabled}
     >
       <Icon as={FaTrash} />

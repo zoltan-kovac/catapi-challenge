@@ -27,7 +27,7 @@ export async function getBreedsQuery(page?: number): Promise<CatImage[]> {
   };
 
   return await axios
-    .get(`https://api.thecatapi.com/v1/breeds`, {
+    .get("https://api.thecatapi.com/v1/breeds", {
       headers,
       params: {
         ...defaultParams,
@@ -41,6 +41,7 @@ export function useBreedsQuery() {
   return useInfiniteQuery({
     queryKey: ["breeds"],
     queryFn: ({ pageParam }) => getBreedsQuery(pageParam),
+    initialPageParam: 0,
     getNextPageParam: (_, allPages) => allPages.length,
   });
 }

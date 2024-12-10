@@ -9,8 +9,8 @@ export default defineConfig({
     react(),
     biomePlugin({
       mode: "check",
-      files: ".",
-      applyFixes: true,
+      files: "./src",
+      // applyFixes: true,
     }),
   ],
 });

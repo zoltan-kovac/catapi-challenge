@@ -5,9 +5,7 @@ import CatList from "../../components/cat-list";
 import Layout from "../../components/layout";
 import { useCatsQuery } from "./api";
 
-type CatsViewProps = {};
-
-const CatsView: React.FC<CatsViewProps> = (): JSX.Element => {
+const CatsView: React.FC = (): JSX.Element => {
   const { catId } = useParams<{ catId: string }>();
   const {
     data: cats = {

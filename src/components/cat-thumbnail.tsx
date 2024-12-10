@@ -40,7 +40,7 @@ const CaatThumbnail: React.FC<CatImageType> = ({ id, url }): JSX.Element => {
         </CardBody>
       </Card>
     ),
-    [],
+    [id, url],
   );
 };
 
