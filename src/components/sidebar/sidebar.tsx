@@ -1,11 +1,11 @@
 import {
   Box,
-  CloseButton,
-  Drawer,
-  DrawerContent,
+  // CloseButton,
+  // Drawer,
+  // DrawerContent,
   Flex,
   Text,
-  useColorModeValue,
+  // useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import { FiHome, FiStar, FiTrendingUp } from "react-icons/fi";
@@ -34,19 +34,17 @@ export function SidebarContent({
   return (
     <Box
       transition="3s ease"
-      bg={useColorModeValue("white", "gray.900")}
+      // bg={useColorModeValue("white", "gray.900")}
       borderRight="1px"
-      borderRightColor={useColorModeValue("gray.200", "gray.700")}
-      w={{ base: "full", md: 60 }}
+      // borderRightColor={useColorModeValue("gray.200", "gray.700")}
+      width={{ base: "full", md: 60 }}
       pos="fixed"
       h="full"
       {...rest}
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Fav cats app
-        </Text>
-        <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
+        <Text>Fav cats app</Text>
+        {/* <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} /> */}
       </Flex>
       {LinkItems.map((link) =>
         link.url ? (
@@ -60,15 +58,18 @@ export function SidebarContent({
 }
 
 export function Sidebar() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { open, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
+    <Box
+      minH="100vh"
+      // bg={useColorModeValue("gray.100", "gray.900")}
+    >
       <SidebarContent
         onClose={() => onClose}
         display={{ base: "none", md: "block" }}
       />
-      <Drawer
+      {/* <Drawer
         isOpen={isOpen}
         placement="left"
         onClose={onClose}
@@ -79,7 +80,7 @@ export function Sidebar() {
         <DrawerContent>
           <SidebarContent onClose={onClose} />
         </DrawerContent>
-      </Drawer>
+      </Drawer> */}
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">

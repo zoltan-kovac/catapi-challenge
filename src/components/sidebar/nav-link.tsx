@@ -1,5 +1,6 @@
-import { Flex, Icon } from "@chakra-ui/react";
-import * as React from "react";
+import { Box, Flex, Icon } from "@chakra-ui/react";
+import type { BoxProps, ChakraComponent } from "@chakra-ui/react";
+import { forwardRef } from "react";
 import type { IconType } from "react-icons";
 import { NavLink as BaseNavLink } from "react-router-dom";
 
@@ -13,11 +14,10 @@ const NavLink: React.FC<NavLinkProps> = ({
   to,
   icon,
 }): JSX.Element => {
-  return React.useMemo(
-    () => (
+  return (
+    <BaseNavLink to={to}>
       <Flex
-        as={BaseNavLink}
-        to={to}
+        // as={BaseNavLink}
         align="center"
         p="4"
         mx="4"
@@ -43,8 +43,7 @@ const NavLink: React.FC<NavLinkProps> = ({
         )}
         {children}
       </Flex>
-    ),
-    [children, to, icon],
+    </BaseNavLink>
   );
 };
 

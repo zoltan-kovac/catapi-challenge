@@ -1,17 +1,18 @@
-import { Card, CardBody, Center, Image, Spinner } from "@chakra-ui/react";
-import * as React from "react";
+import { AspectRatio, Card, Image } from "@chakra-ui/react";
+import { useMemo } from "react";
 import type { CatImage as CatImageType } from "../app/cats/types";
 
-const CaatThumbnail: React.FC<CatImageType> = ({ id, url }): JSX.Element => {
-  return React.useMemo(
+const CatThumbnail: React.FC<CatImageType> = ({ id, url }): JSX.Element => {
+  return useMemo(
     () => (
-      <Card>
-        <CardBody
+      <Card.Root>
+        <Card.Body
           minH={{
             base: "xl",
             sm: "xs",
           }}
         >
+          {/* <AspectRatio ratio={4 / 3} rounded="lg" overflow="hidden"> */}
           <Image
             src={url}
             alt={id}
@@ -26,22 +27,23 @@ const CaatThumbnail: React.FC<CatImageType> = ({ id, url }): JSX.Element => {
             }}
             objectFit="cover"
             cursor="pointer"
-            fallback={
-              <Center
-                minH={{
-                  base: "xl",
-                  sm: "xs",
-                }}
-              >
-                <Spinner />
-              </Center>
-            }
+            // fallback={
+            //   <Center
+            //     minH={{
+            //       base: "xl",
+            //       sm: "xs",
+            //     }}
+            //   >
+            //     <Spinner />
+            //   </Center>
+            // }
           />
-        </CardBody>
-      </Card>
+          {/* </AspectRatio> */}
+        </Card.Body>
+      </Card.Root>
     ),
     [id, url],
   );
 };
 
-export default CaatThumbnail;
+export default CatThumbnail;
