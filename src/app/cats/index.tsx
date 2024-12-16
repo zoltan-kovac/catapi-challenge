@@ -1,5 +1,5 @@
+import CatDetail from "@/components/cat-detail";
 import { Button, Center, Spinner } from "@chakra-ui/react";
-import type * as React from "react";
 import { useParams } from "react-router-dom";
 import CatList from "../../components/cat-list";
 import Layout from "../../components/layout";
@@ -16,28 +16,7 @@ const CatsView: React.FC = (): JSX.Element => {
     fetchNextPage,
   } = useCatsQuery();
 
-  return (
-    <Layout>
-      {isLoading ? (
-        <Center>
-          <Spinner />
-        </Center>
-      ) : (
-        <CatList {...{ cats, catId }} />
-      )}
-      <Center>
-        <Button
-          my={5}
-          size="lg"
-          onClick={() => fetchNextPage()}
-          isLoading={isFetching}
-          disabled={isFetching}
-        >
-          More cats please!
-        </Button>
-      </Center>
-    </Layout>
-  );
+  return <CatList {...{ cats, catId }} />;
 };
 
 export default CatsView;

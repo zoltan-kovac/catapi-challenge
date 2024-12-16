@@ -1,7 +1,7 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import type { Image } from "@thatapicompany/thecatapi/dist/types";
 import axios from "axios";
 import { headers } from "../../lib/api";
-import { type CatImage, SearchQueryParams } from "../cats/types";
 import type { Breed } from "./types";
 
 export async function getBreedQuery(breedId?: string): Promise<Breed> {
@@ -20,7 +20,7 @@ export function useBreedQuery(breedId?: string) {
   });
 }
 
-export async function getBreedsQuery(page?: number): Promise<CatImage[]> {
+export async function getBreedsQuery(page?: number): Promise<Image[]> {
   const defaultParams = {
     limit: 10,
     page: 0,

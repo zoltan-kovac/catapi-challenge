@@ -1,53 +1,35 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import qs from "qs";
-import { headers } from "../../lib/api";
-import type { CatImage, SearchQueryParams } from "./types";
+import type {
+  Image,
+  SearchImagesFilter,
+} from "@thatapicompany/thecatapi/dist/types";
+import { api } from "../../lib/api";
 
-export async function getRandomCatsQuery({
+export async function getRandomImages({
   page,
-  breed_ids,
-}: SearchQueryParams): Promise<CatImage[]> {
-  const defaultParams = {
+}: SearchImagesFilter): Promise<Image[]> {
+  return await api.images.searchImages({
     limit: 10,
-    page: 0,
-  };
-
-  return await axios
-    .get("https://api.thecatapi.com/v1/images/search", {
-      headers,
-      params: {
-        ...defaultParams,
-        page,
-        breed_ids,
-      },
-
-      paramsSerializer: {
-        serialize: (params) => qs.stringify(params, { arrayFormat: "comma" }),
-      },
-    })
-    .then((response) => response.data);
+    page: page ?? 0,
+    hasBreeds: true,
+    mimeTypes: ["png"],
+  });
 }
 
-export function useCatsQuery(breed_ids?: string) {
+export function useCatsQuery() {
   return useInfiniteQuery({
     queryKey: ["cats"],
-    queryFn: ({ pageParam }) =>
-      getRandomCatsQuery({ page: pageParam, breed_ids }),
+    queryFn: ({ pageParam }) => getRandomImages({ page: pageParam }),
     initialPageParam: 0,
     getNextPageParam: (_, allPages) => allPages.length,
   });
 }
 
-export async function getCatQuery(catId?: string): Promise<CatImage> {
-  return await axios
-    .get(`https://api.thecatapi.com/v1/images/${catId}`, {
-      headers,
-    })
-    .then((response) => response.data);
+export async function getCatQuery(catId: string): Promise<Image> {
+  return await api.images.getImage(catId);
 }
 
-export function useCatQuery(catId?: string) {
+export function useCatQuery(catId: string) {
   return useQuery({
     queryKey: ["cats", catId],
     queryFn: () => getCatQuery(catId),
