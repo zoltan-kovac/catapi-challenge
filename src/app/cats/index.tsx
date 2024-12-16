@@ -1,9 +1,9 @@
-import { Button, Center, Spinner } from "@chakra-ui/react";
-import type * as React from "react";
+import { Box, Button, Center, Spinner } from "@chakra-ui/react";
+import { useInView } from "framer-motion";
+import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import CatList from "../../components/cat-list";
-import Layout from "../../components/layout";
-import { useCatsQuery } from "./api";
+import CatList from "./cat-list";
+import { useCatsQuery } from "./queries";
 
 const CatsView: React.FC = (): JSX.Element => {
   const { catId } = useParams<{ catId: string }>();
@@ -11,32 +11,41 @@ const CatsView: React.FC = (): JSX.Element => {
     data: cats = {
       pages: [],
     },
-    isLoading,
-    isFetching,
+    isFetchingNextPage,
+    hasNextPage,
     fetchNextPage,
   } = useCatsQuery();
 
+  const ref = useRef(null);
+  const isInView = useInView(ref);
+
+  useEffect(() => {
+    if (isInView) {
+      fetchNextPage();
+    }
+  }, [isInView, fetchNextPage]);
+
   return (
-    <Layout>
-      {isLoading ? (
-        <Center>
-          <Spinner />
-        </Center>
-      ) : (
-        <CatList {...{ cats, catId }} />
-      )}
-      <Center>
+    <>
+      <CatList {...{ cats, catId }} />
+      <Center p="12">
         <Button
-          my={5}
-          size="lg"
+          type="button"
           onClick={() => fetchNextPage()}
-          isLoading={isFetching}
-          disabled={isFetching}
+          disabled={!hasNextPage || isFetchingNextPage}
+          colorPalette="blue"
+          ref={ref}
         >
-          More cats please!
+          {isFetchingNextPage ? (
+            <Spinner />
+          ) : hasNextPage ? (
+            "More cats please!"
+          ) : (
+            "Nothing more to load"
+          )}
         </Button>
       </Center>
-    </Layout>
+    </>
   );
 };
 

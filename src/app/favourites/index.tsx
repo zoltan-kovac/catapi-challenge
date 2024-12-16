@@ -1,10 +1,9 @@
-import * as React from "react";
-import CatList from "../../components/cat-list";
-import Layout from "../../components/layout";
-import { useGetFavsQuery } from "./api";
+import { useMemo } from "react";
+import CatList from "../cats/cat-list";
+import { useGetFavouritesQuery } from "./queries";
 
 const FavouritesView: React.FC = (): JSX.Element => {
-  const { data: favourites = [] } = useGetFavsQuery();
+  const { data: favourites = [] } = useGetFavouritesQuery();
 
   const cats = favourites?.map((cat) => ({
     ...cat,
@@ -12,14 +11,7 @@ const FavouritesView: React.FC = (): JSX.Element => {
     id: cat?.image_id,
   }));
 
-  return React.useMemo(
-    () => (
-      <Layout>
-        <CatList cats={{ pages: [[...cats]] }} />
-      </Layout>
-    ),
-    [cats],
-  );
+  return useMemo(() => <CatList cats={{ pages: [[...cats]] }} />, [cats]);
 };
 
 export default FavouritesView;
