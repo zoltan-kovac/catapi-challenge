@@ -1,61 +1,76 @@
-import {
-  Box,
-  Container,
-  Drawer,
-  DrawerContent,
-  Flex,
-  Heading,
-  useColorModeValue,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Toaster } from "@/lib/toaster";
+import { Box, Container, Grid, GridItem, Text } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
-import MainNav from "./main-nav";
-import { MobileNav } from "./mobile-nav";
-import { SidebarContent } from "./sidebar/sidebar";
+import MainNav from "./navigation/main-nav";
 
 const Layout: React.FC<React.PropsWithChildren> = ({
   children,
 }): JSX.Element => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
-    <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
-      <SidebarContent
-        onClose={() => onClose}
-        display={{ base: "none", md: "block" }}
-      />
-      <Drawer
-        isOpen={isOpen}
-        placement="left"
-        onClose={onClose}
-        returnFocusOnClose={false}
-        onOverlayClick={onClose}
-        size="full"
+    <Box
+      as="main"
+      height="100%"
+      minH="100vh"
+      bgColor="blue.100/50"
+      display="flex"
+      flexDirection="column"
+      justifyContent="space-between"
+    >
+      <Container
+        maxW="4xl"
+        height="36"
+        borderBottom="1px solid"
+        borderColor="gray.200"
+        mb="12"
+        p="12"
       >
-        <DrawerContent>
-          <SidebarContent onClose={onClose} />
-        </DrawerContent>
-      </Drawer>
-      {/* mobilenav */}
-      <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4">
-        <Outlet />
-        {children && children}
-      </Box>
+        <Text textAlign="right" color="blue.500">
+          Header
+        </Text>
+      </Container>
+      <Container maxW="4xl">
+        <Grid templateColumns="repeat(4, 1fr)" gap="12">
+          <GridItem
+            position="sticky"
+            top="1em"
+            maxH="100vh"
+            colSpan={{
+              base: 4,
+              md: 1,
+            }}
+          >
+            <MainNav />
+          </GridItem>
+          <GridItem
+            colSpan={{
+              base: 4,
+              md: 3,
+            }}
+          >
+            <Outlet />
+          </GridItem>
+          {/* <GridItem
+            colSpan={{
+              base: 4,
+              md: 1,
+            }}
+          /> */}
+        </Grid>
+      </Container>
+      <Container
+        maxW="4xl"
+        height="36"
+        borderTop="1px solid"
+        borderColor="gray.200"
+        mt="12"
+        p="12"
+      >
+        <Text textAlign="right" color="blue.500">
+          2024
+        </Text>
+      </Container>
+      <Toaster />
     </Box>
-    // <Container
-    //   py={10}
-    //   minW={{
-    //     lg: "container.lg",
-    //   }}
-    // >
-    //   <Flex justifyContent="space-between" alignItems="flex-end" mb={5}>
-    //     {/* <Heading size="xl">Cat App</Heading> */}
-    //     <MainNav />
-    //   </Flex>
-    //   <Outlet />
-    //   {children && children}
-    // </Container>
   );
 };
 

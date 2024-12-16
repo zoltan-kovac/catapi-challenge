@@ -1,55 +1,20 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-import { headers } from "../../lib/api";
-import type { FavouriteCat } from "./types";
+import type { Favourite } from "@thatapicompany/thecatapi/dist/types";
+import { api } from "../../lib/api";
 
-export async function getFavsQuery(): Promise<FavouriteCat[]> {
-  return await axios
-    .get("https://api.thecatapi.com/v1/favourites", {
-      headers,
-    })
-    .then((response) => response.data);
+export type FavouritesById = Record<string, Favourite>;
+
+export async function getFavourites(): Promise<Favourite[]> {
+  return await api.favourites.getFavourites();
 }
 
-export function useGetFavsQuery() {
-  return useQuery({
-    queryKey: ["favourites"],
-    queryFn: getFavsQuery,
-  });
+export async function getFavourite(id: number): Promise<Favourite> {
+  return await api.favourites.getFavourite(id);
 }
 
-export async function deleteFavCatQuery(
-  favouriteId?: string,
-): Promise<unknown> {
-  return await axios.delete(
-    `https://api.thecatapi.com/v1/favourites/${favouriteId}`,
-    {
-      headers,
-    },
-  );
+export async function addFavourite(imageId: string): Promise<unknown> {
+  return await api.favourites.addFavourite(imageId);
 }
 
-export function useDeleteFavCatMutation() {
-  return useMutation({
-    mutationFn: deleteFavCatQuery,
-  });
-}
-
-export function useFavCatMutation(catId?: string) {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: () => {
-      return axios.post(
-        "https://api.thecatapi.com/v1/favourites",
-        { image_id: catId },
-        {
-          headers,
-        },
-      );
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["favourites"] });
-    },
-  });
+export async function deleteFavourite(id: number): Promise<unknown> {
+  return await api.favourites.deleteFavourite(id);
 }

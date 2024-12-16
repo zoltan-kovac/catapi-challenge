@@ -5,13 +5,13 @@ import {
   HStack,
   IconButton,
   Menu,
-  MenuButton,
-  MenuDivider,
+  // MenuButton,
+  // MenuDivider,
   MenuItem,
-  MenuList,
+  // MenuList,
   Text,
   VStack,
-  useColorModeValue,
+  // useColorModeValue,
 } from "@chakra-ui/react";
 import { FiBell, FiChevronDown, FiMenu } from "react-icons/fi";
 
@@ -28,9 +28,9 @@ export function MobileNav({ onOpen, ...rest }: MobileProps) {
       px={{ base: 4, md: 4 }}
       height="20"
       alignItems="center"
-      bg={useColorModeValue("white", "gray.900")}
+      // bg={useColorModeValue("white", "gray.900")}
       borderBottomWidth="1px"
-      borderBottomColor={useColorModeValue("gray.200", "gray.700")}
+      // borderBottomColor={useColorModeValue("gray.200", "gray.700")}
       justifyContent={{ base: "space-between", md: "flex-end" }}
       {...rest}
     >
@@ -39,7 +39,7 @@ export function MobileNav({ onOpen, ...rest }: MobileProps) {
         onClick={onOpen}
         variant="outline"
         aria-label="open menu"
-        icon={<FiMenu />}
+        // icon={<FiMenu />}
       />
 
       <Text
@@ -51,7 +51,7 @@ export function MobileNav({ onOpen, ...rest }: MobileProps) {
         Logo
       </Text>
 
-      <HStack spacing={{ base: "0", md: "6" }}>
+      {/* <HStack spacing={{ base: "0", md: "6" }}>
         <IconButton
           size="lg"
           variant="ghost"
@@ -100,7 +100,7 @@ export function MobileNav({ onOpen, ...rest }: MobileProps) {
             </MenuList>
           </Menu>
         </Flex>
-      </HStack>
+      </HStack> */}
     </Flex>
   );
 }

@@ -2,7 +2,7 @@ import { Stack, Tag, TagLabel } from "@chakra-ui/react";
 import type * as React from "react";
 import { useParams } from "react-router-dom";
 import type { Breed } from "../app/breeds/types";
-import NavLink from "./sidebar/nav-link";
+import { NavLink } from "./navigation/main-nav-link";
 
 type BreedListProps = {
   breeds: {

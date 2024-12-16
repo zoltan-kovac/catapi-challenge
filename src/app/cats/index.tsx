@@ -1,43 +1,55 @@
 import { Button, Center, Spinner } from "@chakra-ui/react";
-import type * as React from "react";
+import { useInView } from "framer-motion";
+import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import CatList from "../../components/cat-list";
-import Layout from "../../components/layout";
-import { useCatsQuery } from "./api";
+import CatList from "./cat-list";
+import { useCatsQuery } from "./queries";
 
-const CatsView: React.FC = (): JSX.Element => {
+const CatsFeedPage: React.FC = (): JSX.Element => {
   const { catId } = useParams<{ catId: string }>();
   const {
     data: cats = {
       pages: [],
     },
-    isLoading,
     isFetching,
+    isFetchingNextPage,
+    hasNextPage,
     fetchNextPage,
   } = useCatsQuery();
 
+  const ref = useRef(null);
+  const isInView = useInView(ref);
+
+  useEffect(() => {
+    if (isInView) {
+      fetchNextPage();
+    }
+  }, [isInView, fetchNextPage]);
+
   return (
-    <Layout>
-      {isLoading ? (
-        <Center>
-          <Spinner />
+    <>
+      <CatList {...{ cats, catId }} />
+      {cats != null ? (
+        <Center p="12">
+          <Button
+            type="button"
+            onClick={() => fetchNextPage()}
+            disabled={!hasNextPage || isFetchingNextPage}
+            colorPalette="blue"
+            ref={ref}
+          >
+            {isFetchingNextPage || isFetching ? (
+              <Spinner />
+            ) : hasNextPage ? (
+              "More cats please!"
+            ) : (
+              "Nothing more to load"
+            )}
+          </Button>
         </Center>
-      ) : (
-        <CatList {...{ cats, catId }} />
-      )}
-      <Center>
-        <Button
-          my={5}
-          size="lg"
-          onClick={() => fetchNextPage()}
-          isLoading={isFetching}
-          disabled={isFetching}
-        >
-          More cats please!
-        </Button>
-      </Center>
-    </Layout>
+      ) : null}
+    </>
   );
 };
 
-export default CatsView;
+export default CatsFeedPage;
