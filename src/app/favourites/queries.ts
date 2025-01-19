@@ -13,7 +13,6 @@ export function useGetFavouritesQuery(
 }
 
 export function useFavouriteByImageId(imageId: string) {
-  console.log("imageId", imageId);
   return useGetFavouritesQuery(
     (data: Favourite[]) =>
       data.find((favourite) => imageId === favourite.imageId),

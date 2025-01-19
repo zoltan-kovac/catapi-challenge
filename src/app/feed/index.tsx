@@ -2,10 +2,10 @@ import { Button, Center, Spinner } from "@chakra-ui/react";
 import { useInView } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import CatList from "./cat-list";
-import { useCatsQuery } from "./queries";
+import { useCatsQuery } from "../cats/queries";
+import CatsFeed from "./cats-feed";
 
-const CatsFeedPage: React.FC = (): JSX.Element => {
+export default function CatsFeedPage() {
   const { catId } = useParams<{ catId: string }>();
   const {
     data: cats = {
@@ -28,8 +28,8 @@ const CatsFeedPage: React.FC = (): JSX.Element => {
 
   return (
     <>
-      <CatList {...{ cats, catId }} />
-      {cats != null ? (
+      <CatsFeed {...{ cats, catId }} />
+      {cats.pages.length > 0 ? (
         <Center p="12">
           <Button
             type="button"
@@ -50,6 +50,4 @@ const CatsFeedPage: React.FC = (): JSX.Element => {
       ) : null}
     </>
   );
-};
-
-export default CatsFeedPage;
+}

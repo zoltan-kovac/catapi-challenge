@@ -1,11 +1,11 @@
 import { Toaster } from "@/lib/toaster";
-import { Box, Container, Grid, GridItem, Text } from "@chakra-ui/react";
+import { Box, Container, Grid, GridItem } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
-import MainNav from "./navigation/main-nav";
+import MainNav from "../navigation/main-nav";
+import Header from "./header";
+import Footer from "./footer";
 
-const Layout: React.FC<React.PropsWithChildren> = ({
-  children,
-}): JSX.Element => {
+export default function Layout() {
   return (
     <Box
       as="main"
@@ -16,24 +16,15 @@ const Layout: React.FC<React.PropsWithChildren> = ({
       flexDirection="column"
       justifyContent="space-between"
     >
-      <Container
-        maxW="4xl"
-        height="36"
-        borderBottom="1px solid"
-        borderColor="gray.200"
-        mb="12"
-        p="12"
-      >
-        <Text textAlign="right" color="blue.500">
-          Header
-        </Text>
-      </Container>
+      <Header />
       <Container maxW="4xl">
         <Grid templateColumns="repeat(4, 1fr)" gap="12">
           <GridItem
             position="sticky"
             top="1em"
             maxH="100vh"
+            borderRight="1px dashed"
+            borderColor="gray.300"
             colSpan={{
               base: 4,
               md: 1,
@@ -54,24 +45,13 @@ const Layout: React.FC<React.PropsWithChildren> = ({
               base: 4,
               md: 1,
             }}
-          /> */}
+          >
+          </GridItem> */}
         </Grid>
       </Container>
-      <Container
-        maxW="4xl"
-        height="36"
-        borderTop="1px solid"
-        borderColor="gray.200"
-        mt="12"
-        p="12"
-      >
-        <Text textAlign="right" color="blue.500">
-          2024
-        </Text>
-      </Container>
+      <Footer />
+
       <Toaster />
     </Box>
   );
-};
-
-export default Layout;
+}

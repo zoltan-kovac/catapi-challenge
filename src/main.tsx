@@ -2,12 +2,12 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ErrorBoundary } from "react-error-boundary";
-import { BrowserRouter, Route, Routes, redirect } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import BreedsView from "./app/breeds";
-import CatsFeedPage from "./app/cats";
+import CatsFeedPage from "./app/feed";
 import CatDetailPage from "./app/cats/[id]";
 import FavouritesView from "./app/favourites";
-import Layout from "./components/layout";
+import Layout from "./components/layout/layout";
 import { Providers } from "./lib/providers";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
@@ -15,11 +15,16 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <Providers>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Navigate to="feed" replace />} />
           <Route
-            path="/"
-            loader={() => redirect("cats")}
+            path="feed"
             element={<Layout />}
-          />
+            errorElement={
+              <ErrorBoundary fallback={<h1>Something went wrong</h1>} />
+            }
+          >
+            <Route index element={<CatsFeedPage />} />
+          </Route>
           <Route
             path="cats"
             element={<Layout />}
@@ -27,8 +32,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
               <ErrorBoundary fallback={<h1>Something went wrong</h1>} />
             }
           >
-            <Route index element={<CatsFeedPage />} />
-            <Route path=":catId" element={<CatDetailPage />} />
+            <Route index path=":catId" element={<CatDetailPage />} />
           </Route>
           <Route path="breeds" element={<Layout />}>
             <Route index element={<BreedsView />} />
@@ -38,7 +42,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           </Route>
         </Routes>
       </BrowserRouter>
-      <ReactQueryDevtools initialIsOpen />
+      <ReactQueryDevtools />
     </Providers>
   </React.StrictMode>,
 );

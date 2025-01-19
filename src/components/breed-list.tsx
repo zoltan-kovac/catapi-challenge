@@ -1,8 +1,7 @@
 import { Stack, Tag, TagLabel } from "@chakra-ui/react";
 import type * as React from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import type { Breed } from "../app/breeds/types";
-import { NavLink } from "./navigation/main-nav-link";
 
 type BreedListProps = {
   breeds: {
@@ -10,21 +9,21 @@ type BreedListProps = {
   };
 };
 
-const BreedList: React.FC<BreedListProps> = ({ breeds }): JSX.Element => {
+export default function BreedList({ breeds }: BreedListProps) {
   const { breedId } = useParams<{ breedId: string }>();
 
   return breeds ? (
     <>
       {!breedId && (
-        <Stack spacing={4}>
+        <Stack gap={4}>
           {breeds?.pages?.map((page: Breed[]) => {
             return page?.map(({ name, id }) => {
               return (
-                <Tag size="lg" borderRadius="full" key={`tab-${id}`}>
-                  <NavLink to={`/breeds/${id}`}>
-                    <TagLabel>{name}</TagLabel>
-                  </NavLink>
-                </Tag>
+                // <Tag size="lg" borderRadius="full" key={`tab-${id}`}>
+                <NavLink key={`breed-${id}`} to={`/breeds/${id}`}>
+                  <TagLabel>{name}</TagLabel>
+                </NavLink>
+                // </Tag>
               );
             });
           })}
@@ -34,6 +33,4 @@ const BreedList: React.FC<BreedListProps> = ({ breeds }): JSX.Element => {
   ) : (
     <>No breeds</>
   );
-};
-
-export default BreedList;
+}

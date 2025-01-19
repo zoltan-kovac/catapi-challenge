@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import CatList from "../cats/cat-list";
+import CatList from "../feed/cats-feed";
 import { useGetFavouritesQuery } from "./queries";
 
 const FavouritesView: React.FC = (): JSX.Element => {

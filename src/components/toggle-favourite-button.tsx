@@ -5,7 +5,7 @@ import {
 import { useFavouriteByImageId } from "@/app/favourites/queries";
 import { IconButton, type IconButtonProps } from "@chakra-ui/react";
 import { motion } from "motion/react";
-import { FaHeart } from "react-icons/fa";
+import { PiHeart } from "react-icons/pi";
 
 export const MotionIconButton = motion(IconButton);
 
@@ -21,7 +21,6 @@ export default function ToggleFavouriteButton({
   const { mutate: deleteFavourite } = useDeleteFavouriteMutation();
 
   const isFavourite = favourite?.id != null;
-  console.log("isFetching", isFetching);
 
   return (
     <MotionIconButton
@@ -37,7 +36,7 @@ export default function ToggleFavouriteButton({
       }}
       {...(isFavourite && { color: "red" })}
     >
-      <FaHeart />
+      <PiHeart />
     </MotionIconButton>
   );
 }

@@ -1,20 +1,20 @@
-import { defineSlotRecipe } from "@chakra-ui/react";
+import { defineRecipe } from "@chakra-ui/react";
 
-const mainNavSlotRecipe = defineSlotRecipe({
-  slots: ["root", "text", "icon"],
+export const mainNavLinkRecipe = defineRecipe({
   base: {
-    root: {
-      bg: "blue.500",
-      color: "white",
-      px: 4,
-      py: 2,
+    display: "flex",
+  },
+  variants: {
+    active: {},
+    visual: {
+      solid: { bg: "red.200", color: "white" },
+      outline: { borderWidth: "1px", borderColor: "red.200" },
     },
-    text: {
-      borderRadius: "full",
-      px: 2,
-      py: 1,
+    size: {
+      sm: { padding: "4", fontSize: "12px" },
+      lg: { padding: "8", fontSize: "24px" },
     },
   },
 });
 
-export default mainNavSlotRecipe;
+export default mainNavLinkRecipe;

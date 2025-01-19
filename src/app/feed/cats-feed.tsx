@@ -1,14 +1,14 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import type { Image } from "@thatapicompany/thecatapi/dist/types";
-import CatThumbnail from "./cat-thumbnail";
+import CatThumbnail from "../cats/cat-thumbnail";
 
-type CatListProps = {
+type CatsFeedProps = {
   cats: {
     pages?: Array<Image[]>;
   };
 };
 
-export default function CatList({ cats }: CatListProps) {
+export default function CatsFeed({ cats }: CatsFeedProps) {
   return (
     <SimpleGrid gap={12}>
       {cats?.pages?.map((page: Image[]) => {

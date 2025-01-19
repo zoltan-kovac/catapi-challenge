@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import CatThumbnail from "../cat-thumbnail";
 import { useCatQuery } from "../queries";
 
-const CatDetailPage: React.FC = (): JSX.Element => {
+export default function CatDetailPage() {
   const navigate = useNavigate();
   const { catId } = useParams() as { catId: string };
   const { data, isFetching } = useCatQuery(catId);
@@ -21,6 +21,4 @@ const CatDetailPage: React.FC = (): JSX.Element => {
       )}
     </Box>
   );
-};
-
-export default CatDetailPage;
+}
